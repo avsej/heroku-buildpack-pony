@@ -82,7 +82,8 @@ fi
 step "Using $(${ponyc} --version)"
 
 cd "${build}"
-${ponyc}
+env | indent
+CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} | indent
 
 if ! test -e $build/Procfile && test -n "${name}"
 then
