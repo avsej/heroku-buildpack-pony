@@ -48,7 +48,7 @@ ponyc_url=https://github.com/ponylang/ponyc/archive/${ponyc_ver}.tar.gz
 prefix="${cache}/${ponyc_ver}/prefix"
 ponyc="${prefix}/bin/ponyc"
 
-if test ! -d ${ponyc}
+if test ! -f ${ponyc}
 then
     rm -rf ${cache}/*
     mkdir -p "${cache}/${ponyc_ver}/build"
