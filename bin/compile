@@ -72,16 +72,8 @@ then
     finished
 fi
 
-name=$(ruby -ryaml -e 'puts File.basename(YAML.load(File.read("Procfile"))["web"][/^(\w+)/, 1]) rescue nil')
-if test -z $name
-then
-    name=service
-fi
-if test ! -e $build/Procfile
-then
-    echo "web: ./$name" > $build/Procfile
-fi
+echo "web: ./$(basename $build)" > $build/Procfile
 
 cd "${build}"
-step "Building '${name}' with ponyc $(${ponyc} --version)"
-CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} -o $name 2>&1 | indent
+step "Building with ponyc $(${ponyc} --version)"
+CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} 2>&1 | indent
