@@ -19,14 +19,6 @@ indent() {
     sed -u 's/^/       /'
 }
 
-warn() {
-    echo -e "${YELLOW} !!    $@${NC}"
-}
-
-err() {
-    echo -e >&2 "${RED} !!    $@${NC}"
-}
-
 step() {
     echo "$steptxt $@"
 }
@@ -87,7 +79,7 @@ then
 fi
 if test ! -e $build/Procfile
 then
-    echo -e "web: $name" >> $build/Procfile
+    echo "web: $name" > $build/Procfile
 fi
 
 cd "${build}"
