@@ -83,5 +83,5 @@ then
 fi
 
 cd "${build}"
-step "Building '${name}' with $(${ponyc} --version)"
+step "Building '${name}' with ponyc $(${ponyc} --version)"
 CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} -o $name 2>&1 | indent
