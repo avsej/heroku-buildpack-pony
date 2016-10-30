@@ -60,6 +60,7 @@ then
     start "Extracting ${llvm_archive}"
         tar Jxf ${llvm_archive}
         mv  ${llvm_pkg} ${prefix}
+        rm -f ${llvm_archive}
     finished
 
     start "Fetching tarball for ponyc ${ponyc_ver}"
@@ -67,10 +68,11 @@ then
     finished
     start "Extracting ${ponyc_archive}"
         tar zxf ${ponyc_archive}
+        rm -f ${ponyc_archive}
     finished
     cd "${cache}/${ponyc_ver}/build/${ponyc_pkg}"
     start "Extracting ${ponyc_archive}"
-    make install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry
+    make libponyrt-pic install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry
     finished
 fi
 step "Using $(${ponyc} --version)"
