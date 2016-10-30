@@ -72,14 +72,14 @@ then
     finished
 fi
 
-name=$(ruby -ryaml -e 'puts YAML.load(File.read("Procfile"))["web"][/^(\w+)/, 1] rescue nil')
+name=$(ruby -ryaml -e 'puts File.basename(YAML.load(File.read("Procfile"))["web"][/^(\w+)/, 1]) rescue nil')
 if test -z $name
 then
     name=service
 fi
 if test ! -e $build/Procfile
 then
-    echo "web: $name" > $build/Procfile
+    echo "web: ./$name" > $build/Procfile
 fi
 
 cd "${build}"
