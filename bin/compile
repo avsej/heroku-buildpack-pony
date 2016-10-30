@@ -79,13 +79,17 @@ then
         make libponyrt-pic install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry >/dev/null
     finished
 fi
-step "Using $(${ponyc} --version)"
+
+name=$(ruby -ryaml -e 'puts YAML.load(File.read("Procfile"))["web"][/^(\w+)/, 1] rescue nil')
+if test -z $name
+then
+    name=service
+fi
+if test ! -e $build/Procfile
+then
+    echo -e "web: $name" >> $build/Procfile
+fi
 
 cd "${build}"
-env | indent
-CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} | indent
-
-if ! test -e $build/Procfile && test -n "${name}"
-then
-  echo -e "web: $(basename $build)" >> $build/Procfile
-fi
+step "Building '${name}' with $(${ponyc} --version)"
+CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ ${ponyc} -o $name 2>&1 | indent
