@@ -36,7 +36,7 @@ finished() {
 }
 
 llvm_ver=3.9.0
-llvm_pkg=clang+llvm-${llvm_ver}-x86_64-fedora23
+llvm_pkg=clang+llvm-${llvm_ver}-x86_64-linux-gnu-ubuntu-14.04
 llvm_archive=${llvm_pkg}.tar.xz
 llvm_url=http://llvm.org/releases/${llvm_ver}/${llvm_archive}
 
