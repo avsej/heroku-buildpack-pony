@@ -15,6 +15,10 @@ RED='\033[1;31m'
 NC='\033[0m' # No Color
 CURL="curl -s -L --retry 15 --retry-delay 2" # retry for up to 30 seconds
 
+indent() {
+    sed -u 's/^/       /'
+}
+
 warn() {
     echo -e "${YELLOW} !!    $@${NC}"
 }
@@ -76,3 +80,11 @@ then
     finished
 fi
 step "Using $(${ponyc} --version)"
+
+cd "${build}"
+${ponyc}
+
+if ! test -e $build/Procfile && test -n "${name}"
+then
+  echo -e "web: $(basename $build)" >> $build/Procfile
+fi
