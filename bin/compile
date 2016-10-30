@@ -72,7 +72,7 @@ then
     finished
 fi
 
-echo "web: ./$(basename $build)" > $build/Procfile
+echo "web: sh -c ./$(basename $build)" > $build/Procfile
 
 cd "${build}"
 step "Building with ponyc $(${ponyc} --version)"
