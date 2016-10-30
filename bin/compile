@@ -72,6 +72,6 @@ else
     finished
     cd "${cache}/${ponyc_ver}/build/${ponyc_pkg}"
     start "Extracting ${ponyc_archive}"
-    make install config=release LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry
+    make install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry
     finished
 fi
