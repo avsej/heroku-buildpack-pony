@@ -48,10 +48,8 @@ ponyc_url=https://github.com/ponylang/ponyc/archive/${ponyc_ver}.tar.gz
 prefix="${cache}/${ponyc_ver}/prefix"
 ponyc="${prefix}/bin/ponyc"
 
-if test -d ${ponyc}
+if test ! -d ${ponyc}
 then
-    step "Using $(${ponyc} --version)"
-else
     rm -rf ${cache}/*
     mkdir -p "${cache}/${ponyc_ver}/build"
 
@@ -75,3 +73,4 @@ else
     make install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry
     finished
 fi
+step "Using $(${ponyc} --version)"
