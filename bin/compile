@@ -71,8 +71,8 @@ then
         rm -f ${ponyc_archive}
     finished
     cd "${cache}/${ponyc_ver}/build/${ponyc_pkg}"
-    start "Extracting ${ponyc_archive}"
-    make libponyrt-pic install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry >/dev/null
+    start "Building ponyc ${ponyc_version}"
+        make libponyrt-pic install config=release CC=${prefix}/bin/clang CXX=${prefix}/bin/clang++ LLVM_CONFIG=${prefix}/bin/llvm-config prefix=${prefix} use=pooltrack,telemetry >/dev/null
     finished
 fi
 step "Using $(${ponyc} --version)"
